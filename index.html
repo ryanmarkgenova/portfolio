@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ryan Genova Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav><div class="pill"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
+
+<header class="hero">
+  <canvas id="blur" aria-hidden="true"></canvas>
+  <div class="ribs"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <div class="tc"><span class="rec"></span><span id="timecode">REC 00:00:00:00</span><span>· Seattle, WA</span></div>
+      <h1>I find the story in the data, then I <em>film it.</em></h1>
+      <p class="lede">I'm Ryan Mark Genova, an Informatics student at the University of Washington studying Data Science and Cybersecurity. I build dashboards that explain what happened, and videos that make people care.</p>
+      <div class="ctas"><a class="btn solid" href="#work">See the work</a><a class="btn" href="#contact">Say hi</a></div>
+    </div>
+    <div class="stage">
+      <div class="strap" id="strap"></div>
+      <div id="slate" tabindex="0" role="button" aria-label="Film slate. Drag to swing, click or press Enter to flip.">
+        <div class="flip">
+          <div class="face front">
+            <div class="clap"></div>
+            <div class="slate-body">
+              <div class="cell"><small>Production</small><b>Ryan Genova</b></div>
+              <div class="row2">
+                <div class="cell"><small>Scene</small><b>Data</b></div>
+                <div class="cell"><small>Take</small><b>Video</b></div>
+              </div>
+              <div class="row2">
+                <div class="cell"><small>Roll</small><b>UW '27</b></div>
+                <div class="cell"><small>Mode</small><b>Cyber</b></div>
+              </div>
+            </div>
+          </div>
+          <div class="face back">
+            <div class="clap pink"></div>
+            <div class="slate-body">
+              <div class="cell stat"><small>Social reach</small><b>60K+</b> people</div>
+              <div class="cell stat"><small>Internships</small><b>5</b> data, cyber, consulting</div>
+              <div class="cell stat"><small>Currently</small>Data at EGC, filming around Seattle</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hint">Drag the slate · click to flip</div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="work" class="wrap">
+  <div class="eyebrow">Selected work</div>
+  <h2>Two reels. One storyteller.</h2>
+  <p class="sub">Switch between the data work and the video work, or see the projects where they meet.</p>
+  <div class="switch" role="group" aria-label="Filter projects">
+    <button type="button" data-f="all" aria-pressed="true">All</button>
+    <button type="button" data-f="data" aria-pressed="false">Data</button>
+    <button type="button" data-f="video" aria-pressed="false">Video</button>
+    <button type="button" data-f="both" aria-pressed="false">Data × Video</button>
+  </div>
+
+  <div class="grid" id="grid">
+    <article class="card" data-k="both">
+      <div class="thumb both"><span class="tag">Data × Video</span><span class="tag soon">In progress</span><div class="play"></div></div>
+      <div class="card-b"><h3>Local Restaurant: Story + Sales</h3>
+        <p>Filmed and interviewed a Seattle restaurant, then built a dashboard to measure whether the video moved sales and foot traffic.</p>
+        <div class="stack"><span>Video</span><span>POS data</span><span>Dashboard</span></div>
+        <div class="metric">Result: before/after lift goes here</div></div>
+    </article>
+
+    <article class="card" data-k="video">
+      <div class="thumb video"><span class="tag">Video</span><div class="play"></div></div>
+      <div class="card-b"><h3>Nicho's Matcha Socials</h3>
+        <p>Short-form content for a matcha pop-up shop around greater Seattle, shot and edited while working the counter.</p>
+        <div class="stack"><span>Short-form</span><span>Editing</span><span>Social</span></div>
+        <div class="metric">60,000+ people reached</div></div>
+    </article>
+
+    <article class="card" data-k="data">
+      <div class="thumb data"><span class="tag">Data · Security</span>
+        <svg viewBox="0 0 200 110" aria-hidden="true"><g fill="#FCFFFF"><rect x="10" y="60" width="22" height="40" rx="3"/><rect x="42" y="40" width="22" height="60" rx="3"/><rect x="74" y="50" width="22" height="50" rx="3"/><rect x="106" y="20" width="22" height="80" rx="3"/><rect x="138" y="35" width="22" height="65" rx="3"/></g><rect x="170" y="8" width="22" height="92" rx="3" fill="#D83995"/></svg></div>
+      <div class="card-b"><h3>PhishTank Dashboard</h3>
+        <p>Interactive dashboard exploring reported phishing URLs: which brands get targeted and how reports trend over time.</p>
+        <div class="stack"><span>Data viz</span><span>Cybersecurity</span><span>Team project</span></div>
+        <div class="metric">Info Viz, University of Washington</div></div>
+    </article>
+
+    <article class="card" data-k="video">
+      <div class="thumb video"><span class="tag">Video</span><span class="tag soon">Coming soon</span><div class="play"></div></div>
+      <div class="card-b"><h3>Builder ID Speedrun</h3>
+        <p>Street challenge on campus: can UW students make an AWS Builder Center profile in under 60 seconds?</p>
+        <div class="stack"><span>Street interview</span><span>Funnel data</span></div>
+        <div class="metric">Avg signup time + total signups go here</div></div>
+    </article>
+
+    <article class="card" data-k="data">
+      <div class="thumb data"><span class="tag">Data</span>
+        <svg viewBox="0 0 200 110" aria-hidden="true"><polyline points="10,90 45,70 80,78 115,45 150,52 190,18" fill="none" stroke="#FCFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="190" cy="18" r="9" fill="#D83995"/></svg></div>
+      <div class="card-b"><h3>Plate to Pulse</h3>
+        <p>Personal fitness and nutrition goal tracker that turns daily logs into progress you can actually read.</p>
+        <div class="stack"><span>Python</span><span>Tracking</span><span>Personal</span></div>
+        <div class="metric">Key finding goes here</div></div>
+    </article>
+
+    <article class="card" data-k="video">
+      <div class="thumb video"><span class="tag">Video</span><div class="play"></div></div>
+      <div class="card-b"><h3>Kappa Theta Pi Rush Film</h3>
+        <p>Recruitment video for UW's professional technology fraternity, built to hook viewers in the first three seconds.</p>
+        <div class="stack"><span>Recruitment</span><span>Storytelling</span></div>
+        <div class="metric">Views / turnout goes here</div></div>
+    </article>
+
+    <article class="card" data-k="data">
+      <div class="thumb data"><span class="tag">Data</span>
+        <svg viewBox="0 0 200 110" aria-hidden="true"><g fill="none" stroke="#FCFFFF" stroke-width="5"><rect x="12" y="20" width="44" height="30" rx="6"/><rect x="78" y="20" width="44" height="30" rx="6"/><path d="M56 35h22M122 35h22"/></g><rect x="144" y="20" width="44" height="30" rx="6" fill="#D83995"/><g fill="#FCFFFF"><rect x="12" y="70" width="176" height="8" rx="4" opacity=".4"/><rect x="12" y="88" width="120" height="8" rx="4" opacity=".4"/></g></svg></div>
+      <div class="card-b"><h3>EGC Volunteer Metrics Pipeline</h3>
+        <p>Automated system for an urban agriculture nonprofit to track volunteer hours and impact without manual spreadsheets.</p>
+        <div class="stack"><span>Automation</span><span>Nonprofit</span><span>Reporting</span></div>
+        <div class="metric">Hours saved per month goes here</div></div>
+    </article>
+
+    <article class="card" data-k="both">
+      <div class="thumb both"><span class="tag">Data × Video</span><span class="tag soon">Planned</span>
+        <svg viewBox="0 0 200 110" aria-hidden="true"><g fill="#FCFFFF"><circle cx="40" cy="70" r="8"/><circle cx="70" cy="50" r="12"/><circle cx="110" cy="62" r="6"/><circle cx="140" cy="35" r="15"/></g><circle cx="175" cy="22" r="10" fill="#0B2230"/></svg></div>
+      <div class="card-b"><h3>What Makes Videos Perform</h3>
+        <p>Pulling public creator data from the YouTube Data API to test what actually correlates with views, then testing it on my own content.</p>
+        <div class="stack"><span>API</span><span>Python</span><span>NLP</span></div>
+        <div class="metric">Finding + my own A/B result goes here</div></div>
+    </article>
+
+    <article class="card" data-k="video">
+      <div class="thumb video"><span class="tag">Video</span><div class="play"></div></div>
+      <div class="card-b"><h3>FASA Theater Productions</h3>
+        <p>Video production for the Filipino-American Student Association's theatrical events at UW.</p>
+        <div class="stack"><span>Live events</span><span>Production</span></div>
+        <div class="metric">Link to the film goes here</div></div>
+    </article>
+  </div>
+</section>
+
+<section id="experience" class="wrap">
+  <div class="eyebrow">Experience</div>
+  <h2>Where I've worked</h2>
+  <div class="log">
+    <div class="log-row"><time>Summer 2026</time><div><b>iSpot</b><span>Data Analyst Intern. Saw firsthand how media and data meet.</span></div><span class="chip">Data</span></div>
+    <div class="log-row"><time>Now</time><div><b>Each Green Corner</b><span>Intern. Building the volunteer metrics system for a San Mateo County food access nonprofit.</span></div><span class="chip">Data</span></div>
+    <div class="log-row"><time>Since Jun 2026</time><div><b>Nicho's Matcha</b><span>Pop-up team around Seattle and social video creator.</span></div><span class="chip v">Video</span></div>
+    <div class="log-row"><time>ICG</time><div><b>West Monroe (via ICG)</b><span>ServiceNow student consultant.</span></div><span class="chip">Consulting</span></div>
+    <div class="log-row"><time>ICG</time><div><b>OHSU security project (ICG cyber team)</b><span>WordPress security assessment for a health research center.</span></div><span class="chip">Cyber</span></div>
+    <div class="log-row"><time>ICG</time><div><b>South Shore Analytics</b><span>Data Analytics Intern.</span></div><span class="chip">Data</span></div>
+    <div class="log-row"><time>Research</time><div><b>STEMSEAS</b><span>Cyberinfrastructure Research Intern.</span></div><span class="chip">Cyber</span></div>
+  </div>
+</section>
+
+<section id="about" class="wrap">
+  <div class="about">
+    <div>
+      <div class="eyebrow">About</div>
+      <h2>Big into tech. Hella into matcha.</h2>
+      <p>I study Informatics at UW with concentrations in Data Science and Cybersecurity, and I'm working toward an M.S. in Information Systems.</p>
+      <p>Off the clock I'm usually behind a camera. I lead professional development and pledge education for Kappa Theta Pi, I'm an AWS Builder Club Campus Leader, and I film for FASA and HOMEROOM.</p>
+      <p>I lead as a servant: great leaders build great people, and great people build great communities.</p>
+    </div>
+    <div class="facts">
+      <div class="fact"><b>60K+</b><span>people reached with short-form video</span></div>
+      <div class="fact"><b>5</b><span>internships across data, cyber and consulting</span></div>
+      <div class="fact p"><b>2027</b><span>looking for summer internships in data, cyber, or growth analytics</span></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<div id="contact" class="contact">
+  <div class="wrap">
+    <h2>Building something cool? Let's talk.</h2>
+    <div class="links">
+      <a class="btn solid" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="#" aria-label="Resume link placeholder">Resume</a>
+    </div>
+  </div>
+</div>
+<footer>Made by Ryan Genova · Seattle</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
