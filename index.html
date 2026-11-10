@@ -3,194 +3,384 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ryan Genova Portfolio</title>
+<title>Ryan Genova</title>
+<meta name="description" content="Ryan Genova: data + cyber analyst at the University of Washington who also makes videos.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@400;500;600&family=Pinyon+Script&display=swap">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="grain" aria-hidden="true"></div>
+<canvas id="fx" class="fx" aria-hidden="true"></canvas>
 
-<nav><div class="pill"><a href="#work">Work</a><a href="#experience">Experience</a><a href="#about">About</a><a href="#contact">Contact</a></div></nav>
-
-<header class="hero">
-  <canvas id="blur" aria-hidden="true"></canvas>
-  <div class="ribs"></div>
-  <div class="wrap hero-inner">
-    <div>
-      <div class="tc"><span class="rec"></span><span id="timecode">REC 00:00:00:00</span><span>· Seattle, WA</span></div>
-      <h1>I find the story in the data, then I <em>film it.</em></h1>
-      <p class="lede">I'm Ryan Mark Genova, an Informatics student at the University of Washington studying Data Science and Cybersecurity. I build dashboards that explain what happened, and videos that make people care.</p>
-      <div class="ctas"><a class="btn solid" href="#work">See the work</a><a class="btn" href="#contact">Say hi</a></div>
-    </div>
-    <div class="stage">
-      <div class="strap" id="strap"></div>
-      <div id="slate" tabindex="0" role="button" aria-label="Film slate. Drag to swing, click or press Enter to flip.">
-        <div class="flip">
-          <div class="face front">
-            <div class="clap"></div>
-            <div class="slate-body">
-              <div class="cell"><small>Production</small><b>Ryan Genova</b></div>
-              <div class="row2">
-                <div class="cell"><small>Scene</small><b>Data</b></div>
-                <div class="cell"><small>Take</small><b>Video</b></div>
-              </div>
-              <div class="row2">
-                <div class="cell"><small>Roll</small><b>UW '27</b></div>
-                <div class="cell"><small>Mode</small><b>Cyber</b></div>
-              </div>
-            </div>
-          </div>
-          <div class="face back">
-            <div class="clap pink"></div>
-            <div class="slate-body">
-              <div class="cell stat"><small>Social reach</small><b>60K+</b> people</div>
-              <div class="cell stat"><small>Internships</small><b>5</b> data, cyber, consulting</div>
-              <div class="cell stat"><small>Currently</small>Data at EGC, filming around Seattle</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="hint">Drag the slate · click to flip</div>
-    </div>
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#top">RYAN MARK GENOVA</a>
+    <nav class="toplinks" aria-label="Sections">
+      <a href="#work">Work</a><a href="#experience">Experience</a><a href="#skills">Skills</a><a href="#about">About</a><a href="#contact">Contact</a>
+    </nav>
+    <span class="pill">SEATTLE, WA</span>
   </div>
 </header>
 
-<main>
-<section id="work" class="wrap">
-  <div class="eyebrow">Selected work</div>
-  <h2>Two reels. One storyteller.</h2>
-  <p class="sub">Switch between the data work and the video work, or see the projects where they meet.</p>
-  <div class="switch" role="group" aria-label="Filter projects">
-    <button type="button" data-f="all" aria-pressed="true">All</button>
-    <button type="button" data-f="data" aria-pressed="false">Data</button>
-    <button type="button" data-f="video" aria-pressed="false">Video</button>
-    <button type="button" data-f="both" aria-pressed="false">Data × Video</button>
-  </div>
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-in">
+      <div class="lockup">
+        <p class="hi"><span class="serif">Hi, I'm</span></p>
+        <h1 class="name">
+          <span class="swash">Ryan Mark</span>
+          <span class="wide">GENOVA</span>
+        </h1>
+        <p class="role wide" aria-label="Data + Cyber Analyst"><span id="typed">Data + Cyber Analyst</span><span class="caret" aria-hidden="true"></span></p>
+        <p class="rule-line"><span class="label">Informatics @ UW</span><span class="line"></span><span class="label">Seattle, WA</span></p>
+        <p class="lede">I study data science and cybersecurity at the University of Washington. I build dashboards that explain what happened, and I make videos people actually watch.</p>
+        <div class="ctas">
+          <a class="btn solid" href="#work">See the work</a>
+          <a class="btn" href="#contact">Say hi</a>
+        </div>
+      </div>
 
-  <div class="grid" id="grid">
-    <article class="card" data-k="both">
-      <div class="thumb both"><span class="tag">Data × Video</span><span class="tag soon">In progress</span><div class="play"></div></div>
-      <div class="card-b"><h3>Local Restaurant: Story + Sales</h3>
-        <p>Filmed and interviewed a Seattle restaurant, then built a dashboard to measure whether the video moved sales and foot traffic.</p>
-        <div class="stack"><span>Video</span><span>POS data</span><span>Dashboard</span></div>
-        <div class="metric">Result: before/after lift goes here</div></div>
-    </article>
-
-    <article class="card" data-k="video">
-      <div class="thumb video"><span class="tag">Video</span><div class="play"></div></div>
-      <div class="card-b"><h3>Nicho's Matcha Socials</h3>
-        <p>Short-form content for a matcha pop-up shop around greater Seattle, shot and edited while working the counter.</p>
-        <div class="stack"><span>Short-form</span><span>Editing</span><span>Social</span></div>
-        <div class="metric">60,000+ people reached</div></div>
-    </article>
-
-    <article class="card" data-k="data">
-      <div class="thumb data"><span class="tag">Data · Security</span>
-        <svg viewBox="0 0 200 110" aria-hidden="true"><g fill="#FCFFFF"><rect x="10" y="60" width="22" height="40" rx="3"/><rect x="42" y="40" width="22" height="60" rx="3"/><rect x="74" y="50" width="22" height="50" rx="3"/><rect x="106" y="20" width="22" height="80" rx="3"/><rect x="138" y="35" width="22" height="65" rx="3"/></g><rect x="170" y="8" width="22" height="92" rx="3" fill="#D83995"/></svg></div>
-      <div class="card-b"><h3>PhishTank Dashboard</h3>
-        <p>Interactive dashboard exploring reported phishing URLs: which brands get targeted and how reports trend over time.</p>
-        <div class="stack"><span>Data viz</span><span>Cybersecurity</span><span>Team project</span></div>
-        <div class="metric">Info Viz, University of Washington</div></div>
-    </article>
-
-    <article class="card" data-k="video">
-      <div class="thumb video"><span class="tag">Video</span><span class="tag soon">Coming soon</span><div class="play"></div></div>
-      <div class="card-b"><h3>Builder ID Speedrun</h3>
-        <p>Street challenge on campus: can UW students make an AWS Builder Center profile in under 60 seconds?</p>
-        <div class="stack"><span>Street interview</span><span>Funnel data</span></div>
-        <div class="metric">Avg signup time + total signups go here</div></div>
-    </article>
-
-    <article class="card" data-k="data">
-      <div class="thumb data"><span class="tag">Data</span>
-        <svg viewBox="0 0 200 110" aria-hidden="true"><polyline points="10,90 45,70 80,78 115,45 150,52 190,18" fill="none" stroke="#FCFFFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="190" cy="18" r="9" fill="#D83995"/></svg></div>
-      <div class="card-b"><h3>Plate to Pulse</h3>
-        <p>Personal fitness and nutrition goal tracker that turns daily logs into progress you can actually read.</p>
-        <div class="stack"><span>Python</span><span>Tracking</span><span>Personal</span></div>
-        <div class="metric">Key finding goes here</div></div>
-    </article>
-
-    <article class="card" data-k="video">
-      <div class="thumb video"><span class="tag">Video</span><div class="play"></div></div>
-      <div class="card-b"><h3>Kappa Theta Pi Rush Film</h3>
-        <p>Recruitment video for UW's professional technology fraternity, built to hook viewers in the first three seconds.</p>
-        <div class="stack"><span>Recruitment</span><span>Storytelling</span></div>
-        <div class="metric">Views / turnout goes here</div></div>
-    </article>
-
-    <article class="card" data-k="data">
-      <div class="thumb data"><span class="tag">Data</span>
-        <svg viewBox="0 0 200 110" aria-hidden="true"><g fill="none" stroke="#FCFFFF" stroke-width="5"><rect x="12" y="20" width="44" height="30" rx="6"/><rect x="78" y="20" width="44" height="30" rx="6"/><path d="M56 35h22M122 35h22"/></g><rect x="144" y="20" width="44" height="30" rx="6" fill="#D83995"/><g fill="#FCFFFF"><rect x="12" y="70" width="176" height="8" rx="4" opacity=".4"/><rect x="12" y="88" width="120" height="8" rx="4" opacity=".4"/></g></svg></div>
-      <div class="card-b"><h3>EGC Volunteer Metrics Pipeline</h3>
-        <p>Automated system for an urban agriculture nonprofit to track volunteer hours and impact without manual spreadsheets.</p>
-        <div class="stack"><span>Automation</span><span>Nonprofit</span><span>Reporting</span></div>
-        <div class="metric">Hours saved per month goes here</div></div>
-    </article>
-
-    <article class="card" data-k="both">
-      <div class="thumb both"><span class="tag">Data × Video</span><span class="tag soon">Planned</span>
-        <svg viewBox="0 0 200 110" aria-hidden="true"><g fill="#FCFFFF"><circle cx="40" cy="70" r="8"/><circle cx="70" cy="50" r="12"/><circle cx="110" cy="62" r="6"/><circle cx="140" cy="35" r="15"/></g><circle cx="175" cy="22" r="10" fill="#0B2230"/></svg></div>
-      <div class="card-b"><h3>What Makes Videos Perform</h3>
-        <p>Pulling public creator data from the YouTube Data API to test what actually correlates with views, then testing it on my own content.</p>
-        <div class="stack"><span>API</span><span>Python</span><span>NLP</span></div>
-        <div class="metric">Finding + my own A/B result goes here</div></div>
-    </article>
-
-    <article class="card" data-k="video">
-      <div class="thumb video"><span class="tag">Video</span><div class="play"></div></div>
-      <div class="card-b"><h3>FASA Theater Productions</h3>
-        <p>Video production for the Filipino-American Student Association's theatrical events at UW.</p>
-        <div class="stack"><span>Live events</span><span>Production</span></div>
-        <div class="metric">Link to the film goes here</div></div>
-    </article>
-  </div>
-</section>
-
-<section id="experience" class="wrap">
-  <div class="eyebrow">Experience</div>
-  <h2>Where I've worked</h2>
-  <div class="log">
-    <div class="log-row"><time>Summer 2026</time><div><b>iSpot</b><span>Data Analyst Intern. Saw firsthand how media and data meet.</span></div><span class="chip">Data</span></div>
-    <div class="log-row"><time>Now</time><div><b>Each Green Corner</b><span>Intern. Building the volunteer metrics system for a San Mateo County food access nonprofit.</span></div><span class="chip">Data</span></div>
-    <div class="log-row"><time>Since Jun 2026</time><div><b>Nicho's Matcha</b><span>Pop-up team around Seattle and social video creator.</span></div><span class="chip v">Video</span></div>
-    <div class="log-row"><time>ICG</time><div><b>West Monroe (via ICG)</b><span>ServiceNow student consultant.</span></div><span class="chip">Consulting</span></div>
-    <div class="log-row"><time>ICG</time><div><b>OHSU security project (ICG cyber team)</b><span>WordPress security assessment for a health research center.</span></div><span class="chip">Cyber</span></div>
-    <div class="log-row"><time>ICG</time><div><b>South Shore Analytics</b><span>Data Analytics Intern.</span></div><span class="chip">Data</span></div>
-    <div class="log-row"><time>Research</time><div><b>STEMSEAS</b><span>Cyberinfrastructure Research Intern.</span></div><span class="chip">Cyber</span></div>
-  </div>
-</section>
-
-<section id="about" class="wrap">
-  <div class="about">
-    <div>
-      <div class="eyebrow">About</div>
-      <h2>Big into tech. Hella into matcha.</h2>
-      <p>I study Informatics at UW with concentrations in Data Science and Cybersecurity, and I'm working toward an M.S. in Information Systems.</p>
-      <p>Off the clock I'm usually behind a camera. I lead professional development and pledge education for Kappa Theta Pi, I'm an AWS Builder Club Campus Leader, and I film for FASA and HOMEROOM.</p>
-      <p>I lead as a servant: great leaders build great people, and great people build great communities.</p>
+      <div class="strip-wrap">
+        <button type="button" class="strip" id="strip" aria-pressed="false" aria-label="Film frame. Click to flip between Ryan's photo and his info.">
+          <span class="sprockets left" aria-hidden="true"></span>
+          <span class="flipper">
+            <span class="face front">
+              <img src="assets/ryan.jpg" alt="Photo booth portrait of Ryan Mark Genova smiling">
+              <span class="cap">Ryan Mark Genova</span>
+            </span>
+            <span class="face back">
+              <span class="b-name">Ryan Mark Genova</span>
+              <span class="b-role">Data + Cyber Analyst</span>
+              <span class="b-list">
+                <span><i>School</i>Informatics @ UW, Data Science + Cyber</span>
+                <span><i>Now</i>Data intern @ Each Green Corner</span>
+                <span><i>Video</i>60K+ people reached on short-form</span>
+                <span><i>Leading</i>VP Prof. Development, Kappa Theta Pi</span>
+                <span><i>Open to</i>Summer 2027 internships</span>
+              </span>
+            </span>
+          </span>
+          <span class="sprockets right" aria-hidden="true"></span>
+          <span class="edge" aria-hidden="true"><span>RG 400</span><span id="frameNo">▸ 01A</span></span>
+        </button>
+        <p class="label strip-hint" id="stripHint">Tap the frame to flip it</p>
+      </div>
     </div>
-    <div class="facts">
-      <div class="fact"><b>60K+</b><span>people reached with short-form video</span></div>
-      <div class="fact"><b>5</b><span>internships across data, cyber and consulting</span></div>
-      <div class="fact p"><b>2027</b><span>looking for summer internships in data, cyber, or growth analytics</span></div>
+  </section>
+
+  <!-- WORK DASHBOARD -->
+  <section id="work" class="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Selected work</p>
+        <h2><span class="serif">The</span> <span class="wide">REEL</span></h2>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi"><b>60K+</b><span>People reached</span></div>
+        <div class="kpi"><b>3</b><span>Internships</span></div>
+        <div class="kpi"><b id="projCount">9</b><span>Projects shown</span></div>
+        <div class="kpi"><b>2</b><span>Lanes: data + video</span></div>
+      </div>
+
+      <div class="dash">
+        <aside class="slicers" aria-label="Filter projects">
+          <fieldset>
+            <legend class="label">Type</legend>
+            <label><input type="checkbox" id="f-data" name="type" value="data" checked> Data</label>
+            <label><input type="checkbox" id="f-video" name="type" value="video" checked> Video</label>
+          </fieldset>
+          <fieldset>
+            <legend class="label">Area</legend>
+            <label><input type="radio" id="a-all" name="area" value="all" checked> All</label>
+            <label><input type="radio" id="a-cyber" name="area" value="cyber"> Cyber</label>
+            <label><input type="radio" id="a-marketing" name="area" value="marketing"> Marketing</label>
+            <label><input type="radio" id="a-community" name="area" value="community"> Community</label>
+            <label><input type="radio" id="a-personal" name="area" value="personal"> Personal</label>
+          </fieldset>
+          <button type="button" class="reset" id="reset">Reset filters</button>
+        </aside>
+
+        <div class="grid" id="grid">
+          <!--
+            Each card: data-type="data|video|data video", data-area="...".
+            Add a hover preview by setting data-preview="previews/clip.mp4" on .thumb
+          -->
+          <article class="card" data-type="data video" data-area="marketing community">
+            <div class="thumb t-both" data-preview=""><span class="tag">Data × Video</span><span class="tag soon">In progress</span><span class="play" aria-hidden="true"></span></div>
+            <h3>Local Restaurant: Story + Sales</h3>
+            <p class="result">Did the video move sales? Before/after lift goes here</p>
+            <p class="tools">Video · POS data · Dashboard</p>
+          </article>
+
+          <article class="card" data-type="video" data-area="marketing">
+            <div class="thumb t-video" data-preview=""><span class="tag">Video</span><span class="play" aria-hidden="true"></span></div>
+            <h3>Nicho's Matcha Socials</h3>
+            <p class="result">60,000+ people reached</p>
+            <p class="tools">Short-form · Editing · Social</p>
+          </article>
+
+          <article class="card" data-type="data" data-area="cyber">
+            <div class="thumb t-data" data-preview=""><span class="tag">Data · Security</span>
+              <svg viewBox="0 0 200 110" aria-hidden="true"><g fill="currentColor" opacity=".85"><rect x="10" y="60" width="22" height="40" rx="2"/><rect x="42" y="40" width="22" height="60" rx="2"/><rect x="74" y="50" width="22" height="50" rx="2"/><rect x="106" y="22" width="22" height="78" rx="2"/><rect x="138" y="35" width="22" height="65" rx="2"/></g><rect x="170" y="8" width="22" height="92" rx="2" fill="#FFC21A"/></svg></div>
+            <h3>PhishTank Dashboard</h3>
+            <p class="result">Which brands phishers target, and when</p>
+            <p class="tools">Data viz · Cybersecurity · Team project</p>
+          </article>
+
+          <article class="card" data-type="video" data-area="marketing community">
+            <div class="thumb t-video" data-preview=""><span class="tag">Video</span><span class="tag soon">Coming soon</span><span class="play" aria-hidden="true"></span></div>
+            <h3>Builder ID Speedrun</h3>
+            <p class="result">Can UW students make an AWS profile in 60 sec?</p>
+            <p class="tools">Street interview · Funnel data</p>
+          </article>
+
+          <article class="card" data-type="data" data-area="personal">
+            <div class="thumb t-data" data-preview=""><span class="tag">Data</span>
+              <svg viewBox="0 0 200 110" aria-hidden="true"><polyline points="10,90 45,70 80,78 115,45 150,52 188,20" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/><circle cx="188" cy="20" r="9" fill="#FFC21A"/></svg></div>
+            <h3>Plate to Pulse</h3>
+            <p class="result">Key finding goes here</p>
+            <p class="tools">Python · Tracking · Personal</p>
+          </article>
+
+          <article class="card" data-type="video" data-area="community">
+            <div class="thumb t-video" data-preview=""><span class="tag">Video</span><span class="play" aria-hidden="true"></span></div>
+            <h3>Kappa Theta Pi Rush Film</h3>
+            <p class="result">Views / turnout goes here</p>
+            <p class="tools">Recruitment · Storytelling</p>
+          </article>
+
+          <article class="card" data-type="data" data-area="community">
+            <div class="thumb t-data" data-preview=""><span class="tag">Data</span>
+              <svg viewBox="0 0 200 110" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="5" opacity=".85"><rect x="12" y="20" width="44" height="30" rx="5"/><rect x="78" y="20" width="44" height="30" rx="5"/><path d="M56 35h22M122 35h22"/></g><rect x="144" y="20" width="44" height="30" rx="5" fill="#FFC21A"/><g fill="currentColor" opacity=".35"><rect x="12" y="70" width="176" height="8" rx="4"/><rect x="12" y="88" width="120" height="8" rx="4"/></g></svg></div>
+            <h3>EGC Volunteer Metrics</h3>
+            <p class="result">1,000+ events processed nightly, 70%+ less manual work</p>
+            <p class="tools">Automation · Nonprofit · Reporting</p>
+          </article>
+
+          <article class="card" data-type="data video" data-area="marketing personal">
+            <div class="thumb t-both" data-preview=""><span class="tag">Data × Video</span><span class="tag soon">Planned</span>
+              <svg viewBox="0 0 200 110" aria-hidden="true"><g fill="currentColor" opacity=".85"><circle cx="40" cy="72" r="8"/><circle cx="72" cy="52" r="12"/><circle cx="110" cy="64" r="6"/><circle cx="142" cy="36" r="15"/></g><circle cx="178" cy="22" r="10" fill="#FFC21A"/></svg></div>
+            <h3>What Makes Videos Perform</h3>
+            <p class="result">Finding + my own A/B result goes here</p>
+            <p class="tools">YouTube API · Python · NLP</p>
+          </article>
+
+          <article class="card" data-type="video" data-area="community">
+            <div class="thumb t-video" data-preview=""><span class="tag">Video</span><span class="play" aria-hidden="true"></span></div>
+            <h3>FASA Theater Productions</h3>
+            <p class="result">10,000+ reached promoting Filnight</p>
+            <p class="tools">Live events · Production</p>
+          </article>
+
+          <p class="empty" id="empty" hidden>No projects match those filters. <button type="button" id="reset2">Reset filters</button></p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="exp">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label">Experience</p>
+        <h2><span class="serif">The</span> <span class="wide">TIMELINE</span></h2>
+        <p class="sec-sub">Newest at the top. Each stop says what I did and where.</p>
+      </div>
+      <div class="tl-wrap">
+      <span class="tl-progress" aria-hidden="true"></span>
+      <ol class="timeline">
+        <li class="tl now">
+          <span class="tl-date">Feb 2026 – Present</span>
+          <div class="tl-body">
+            <p class="tl-role">Data Analytics &amp; Visualization Intern</p>
+            <p class="tl-org">Each Green Corner <span>· Nonprofit, San Mateo County</span></p>
+            <p class="tl-desc">Built an automated pipeline from their CRM to Google Sheets that processes 1,000+ events nightly, and KPI dashboards tracking 11,000+ volunteer hours. Cut manual work by 70%+.</p>
+            <p class="tl-tags"><span>Data</span><span>Automation</span></p>
+          </div>
+        </li>
+        <li class="tl now">
+          <span class="tl-date">Jun 2026 – Present</span>
+          <div class="tl-body">
+            <p class="tl-role">Pop-up Team + Content</p>
+            <p class="tl-org">Nicho's Matcha <span>· Seattle</span></p>
+            <p class="tl-desc">Run pop-ups around greater Seattle and shoot and edit the social videos, which have reached 60,000+ people.</p>
+            <p class="tl-tags"><span>Video</span><span>Social</span></p>
+          </div>
+        </li>
+        <li class="tl">
+          <span class="tl-date">Mar – Jun 2026</span>
+          <div class="tl-body">
+            <p class="tl-role">ServiceNow Consultant Intern</p>
+            <p class="tl-org">West Monroe <span>· via ICG</span></p>
+            <p class="tl-desc">Led a ServiceNow value assessment for an enterprise client and delivered an 8-recommendation roadmap, including 2 AI-powered quick wins.</p>
+            <p class="tl-tags"><span>Consulting</span><span>ServiceNow</span></p>
+          </div>
+        </li>
+        <li class="tl">
+          <span class="tl-date">2025 – 2026</span>
+          <div class="tl-body">
+            <p class="tl-role">Cybersecurity Consultant</p>
+            <p class="tl-org">ICG · OHSU <span>· Student consulting</span></p>
+            <p class="tl-desc">On the ICG cyber team, ran a WordPress security assessment for a health research center at OHSU.</p>
+            <p class="tl-tags"><span>Cyber</span><span>Consulting</span></p>
+          </div>
+        </li>
+        <li class="tl">
+          <span class="tl-date">Mar – Apr 2025</span>
+          <div class="tl-body">
+            <p class="tl-role">Cyberinfrastructure Research Intern</p>
+            <p class="tl-org">STEMSEAS <span>· Research</span></p>
+            <p class="tl-desc">Turned live sensor data into insights with Python aboard a research vessel off Alaska and Hawaii. Improved measurement accuracy 25% and led a 5-person team.</p>
+            <p class="tl-tags"><span>Cyber</span><span>Research</span></p>
+          </div>
+        </li>
+      </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="skills">
+    <div class="wrap">
+      <div class="sec-head sk-head">
+        <p class="label">Toolkit</p>
+        <h2><span class="serif">My</span> <span class="wide">SKILLS</span></h2>
+      </div>
+      <div class="skrow">
+        <h3 class="group label">Languages</h3>
+        <ul class="skillgrid">
+        <li class="skill"><span class="ico"><img src="assets/skills/python.svg" alt="" width="44" height="44"></span><span>Python</span></li>
+        <li class="skill"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3"><ellipse cx="24" cy="11" rx="14" ry="5"/><path d="M10 11v26c0 2.8 6.3 5 14 5s14-2.2 14-5V11"/><path d="M10 24c0 2.8 6.3 5 14 5s14-2.2 14-5"/></g></svg></span><span>SQL</span></li>
+        <li class="skill"><span class="ico"><img src="assets/skills/r.svg" alt="" width="44" height="44"></span><span>R</span></li>
+        <li class="skill"><span class="ico"><img src="assets/skills/java.svg" alt="" width="44" height="44"></span><span>Java</span></li>
+        </ul>
+      </div>
+      <div class="skrow">
+        <h3 class="group label">Data &amp; Analysis</h3>
+        <ul class="skillgrid">
+        <li class="skill"><span class="ico"><img src="assets/skills/jupyter.svg" alt="" width="44" height="44"></span><span>Jupyter</span></li>
+        <li class="skill"><span class="ico"><img src="assets/skills/scikitlearn.svg" alt="" width="44" height="44"></span><span>scikit-learn</span></li>
+        <li class="skill"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M8 10h32v22H22l-8 7v-7H8z"/><path d="M15 18h18M15 24h11"/></g></svg></span><span>NLP</span></li>
+        <li class="skill"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3"><rect x="7" y="8" width="34" height="32" rx="3"/><path d="M7 18h34M7 29h34M19 8v32M30 8v32"/></g></svg></span><span>Excel</span></li>
+        <li class="skill"><span class="ico"><img src="assets/skills/tableau.svg" alt="" width="44" height="44"></span><span>Tableau</span></li>
+        <li class="skill"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="currentColor"><rect x="8" y="26" width="7" height="14" rx="1.5"/><rect x="19" y="18" width="7" height="22" rx="1.5"/><rect x="30" y="9" width="7" height="31" rx="1.5"/></g></svg></span><span>Power BI</span></li>
+        </ul>
+      </div>
+      <div class="skrow">
+        <h3 class="group label">Security</h3>
+        <ul class="skillgrid">
+        <li class="skill"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><path d="M24 6l15 6v10c0 9.5-6.4 16.7-15 20-8.6-3.3-15-10.5-15-20V12z"/><path d="M24 17v9M24 31v1"/></g></svg></span><span>Threat Modeling</span></li>
+        <li class="skill"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3"><rect x="7" y="7" width="34" height="34" rx="3"/><path d="M7 24h34M24 7v34"/></g><circle cx="33" cy="15" r="4" fill="currentColor"/></svg></span><span>Risk Assessment</span></li>
+        </ul>
+      </div>
+      <div class="skrow">
+        <h3 class="group label">Tools &amp; Platforms</h3>
+        <ul class="skillgrid">
+        <li class="skill"><span class="ico"><img src="assets/skills/aws.svg" alt="" width="44" height="44"></span><span>AWS Builder Club</span></li>
+        <li class="skill"><span class="ico"><img src="assets/skills/git.svg" alt="" width="44" height="44"></span><span>Git</span></li>
+        <li class="skill"><span class="ico"><img src="assets/skills/github.svg" alt="" width="44" height="44"></span><span>GitHub</span></li>
+        <li class="skill"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="6" y="9" width="14" height="10" rx="2"/><rect x="28" y="9" width="14" height="10" rx="2"/><rect x="17" y="30" width="14" height="10" rx="2"/><path d="M13 19v5h22v-5M24 24v6"/></g></svg></span><span>ServiceNow</span></li>
+        </ul>
+      </div>
+      <div class="skrow">
+        <h3 class="group label">Video &amp; Photo</h3>
+        <ul class="skillgrid">
+        <li class="skill"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="6" y="18" width="36" height="22" rx="2"/><path d="M6 18l4-10 34 4-2 6"/><path d="M15 9.5l-3 8M25 10.7l-3 7.3M35 12l-3 6"/></g></svg></span><span>Final Cut Pro</span></li>
+        <li class="skill"><span class="ico"><img src="assets/skills/davinci.svg" alt="" width="44" height="44"></span><span>DaVinci Resolve</span></li>
+        <li class="skill"><span class="ico"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"><rect x="6" y="9" width="36" height="30" rx="3"/><path d="M6 33l11-11 9 9 6-6 10 10"/></g><circle cx="32" cy="17" r="3.5" fill="currentColor"/></svg></span><span>Pixelmator Pro</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <div class="wrap about-in">
+      <div>
+        <p class="label">About</p>
+        <h2><span class="serif">Big into</span> <span class="wide">TECH</span></h2>
+        <p>I study Informatics at UW with a focus on Data Science and Cybersecurity, and I'm working toward an M.S. in Information Systems.</p>
+        <p>Outside of class I'm usually making something: videos, photos, music, or a new matcha recipe I'm testing on my friends. When I'm not doing that, I'm on a volleyball court.</p>
+        <p>On campus I run professional development and pledge education for Kappa Theta Pi, lead AWS Student Builders as a Campus Leader, and film for orgs like FASA and HOMEROOM.</p>
+        <p>The goal is simple: get a little sharper every month. Cleaner dashboards, tighter edits, better teammate.</p>
+      </div>
+      <div class="about-side">
+        <div class="paper" id="paper" data-src="assets/ryan.jpg" data-caption="Seattle, 2026">
+          <img src="assets/ryan.jpg" alt="Printed photo of Ryan Mark Genova">
+        </div>
+        <p class="label paper-hint">Hold, drag and crumple the print</p>
+        <blockquote class="quote">
+          <p>Build up the people around you, and they’ll build the community.</p>
+          <footer class="label">How I lead</footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <canvas id="slats" class="slats" aria-hidden="true"></canvas>
+    <div class="wrap contact-in">
+      <div class="contact-main">
+        <h2 class="name small-name"><span class="swash">Say</span><span class="wide">HELLO</span></h2>
+        <p class="rule-line"><span class="label">Internships · Summer 2027</span><span class="line"></span><span class="label">Data, cyber, growth</span></p>
+        <div class="ctas">
+          <a class="btn solid" href="https://www.linkedin.com/in/ryanmarkgenova/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/ryanmarkgenova" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="assets/RyanMarkGenova_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        </div>
+      </div>
+      <div class="dodge" id="dodge">
+        <div class="dodge-game">
+          <p class="label dodge-title">Catch me to get in touch</p>
+          <button type="button" class="dodge-target">
+            <img src="assets/ryan.jpg" alt="" width="34" height="34">
+            <span class="dodge-label">Catch me</span>
+          </button>
+          <button type="button" class="dodge-skip" id="dodgeSkip">Skip the game</button>
+        </div>
+        <form class="reach" id="reach" novalidate hidden>
+          <p class="reach-title"><span class="swash">Okay,</span> you got me.</p>
+          <p class="reach-sub">Want to work on a project, talk internships, or just chat? Leave a note and I'll get back to you.</p>
+          <label for="r-name">Name</label>
+          <input id="r-name" name="name" type="text" autocomplete="name" required>
+          <label for="r-email">Email</label>
+          <input id="r-email" name="email" type="email" autocomplete="email" required>
+          <label for="r-topic">What's it about?</label>
+          <select id="r-topic" name="topic">
+            <option>A project</option>
+            <option>Internships or jobs</option>
+            <option>Video work</option>
+            <option>Just to talk</option>
+          </select>
+          <label for="r-msg">Message</label>
+          <textarea id="r-msg" name="message" rows="3" required></textarea>
+          <button type="submit" class="btn solid">Send it</button>
+          <p class="reach-status" id="reachStatus" role="status"></p>
+        </form>
+      </div>
+    </div>
+  </section>
 </main>
 
-<div id="contact" class="contact">
-  <div class="wrap">
-    <h2>Building something cool? Let's talk.</h2>
-    <div class="links">
-      <a class="btn solid" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="btn" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="#" aria-label="Resume link placeholder">Resume</a>
-    </div>
+<footer class="bottombar">
+  <div class="wrap bottom-in">
+    <span class="pill">Roll #01</span>
+    <span class="label"><b>Shot on:</b> HTML, CSS, JavaScript</span>
+    <span class="label">© 2026 Ryan Mark Genova</span>
   </div>
-</div>
-<footer>Made by Ryan Genova · Seattle</footer>
+</footer>
 
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/vendor/lenis.min.js"></script>
+<script src="assets/vendor/three.min.js"></script>
 <script src="script.js"></script>
+<script src="effects.js"></script>
+<script src="cursor.js"></script>
 </body>
 </html>
