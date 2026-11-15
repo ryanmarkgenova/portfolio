@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CutShare: Parallel Editing for Final Cut Pro · Ryan Genova</title>
+<meta name="description" content="CutShare lets several editors cut one Final Cut Pro video at the same time and merges their work automatically, with a visual diff of every change.">
+<meta property="og:title" content="CutShare: Parallel Editing for Final Cut Pro">
+<meta property="og:description" content="Final Cut Pro has no way for two editors to work on one project, so I built one.">
+<meta property="og:image" content="../assets/cutshare/banner.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@400;500;600&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="case">
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../index.html">RYAN MARK GENOVA</a>
+    <nav class="toplinks" aria-label="Sections">
+      <a href="#problem">Problem</a><a href="#build">Build</a><a href="#how">How it works</a><a href="#results">Results</a>
+    </nav>
+    <a class="pill back-link" href="../index.html#work">← All work</a>
+  </div>
+</header>
+
+<main>
+  <!-- intro -->
+  <section class="cs-hero">
+    <div class="wrap">
+      <p class="label">Case study · Nov 2026 · Personal project</p>
+      <h1 class="cs-title"><span class="wide">CutShare</span></h1>
+      <p class="cs-sub"><span class="serif">Parallel editing for Final Cut Pro</span></p>
+      <p class="lede">Final Cut Pro has no way for two editors to work on one project. I built a tool that splits a video into segments, lets several people cut their own segment at the same time, and stitches everyone's work back into one timeline with a right-click. Every change shows up on a visual diff.</p>
+      <div class="cs-meta">
+        <div><span class="label">Role</span><p>Solo: research, design, code, testing</p></div>
+        <div><span class="label">Built with</span><p>Python, FCPXML, AppleScript, Automator, HTML/CSS/JS, GitHub Actions</p></div>
+        <div><span class="label">Tested on</span><p>A real 59.94p short film in Final Cut Pro 12</p></div>
+      </div>
+      <div class="ctas">
+        <a class="btn solid" href="https://github.com/ryanmarkgenova/cutshare" target="_blank" rel="noopener">Code on GitHub</a>
+        <a class="btn" href="https://github.com/ryanmarkgenova/cutshare/blob/main/docs/DESIGN.md" target="_blank" rel="noopener">Design doc</a>
+      </div>
+    </div>
+    <div class="wrap">
+      <figure class="cs-shot hero-shot">
+        <img src="../assets/cutshare/diff-zoomed.webp" width="1600" height="1111" alt="CutShare's visual diff: removed clips in red and a trimmed clip in amber, before and after">
+      </figure>
+    </div>
+  </section>
+
+  <!-- numbers -->
+  <section class="cs-band">
+    <div class="wrap">
+      <div class="kpis">
+        <div class="kpi"><b>6</b><span>Editing tools researched</span></div>
+        <div class="kpi"><b>0</b><span>Differences after split + reassemble</span></div>
+        <div class="kpi"><b>17</b><span>Automated tests</span></div>
+        <div class="kpi"><b>5</b><span>Right-click actions, no Terminal</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- problem -->
+  <section id="problem">
+    <div class="wrap cs-grid">
+      <div>
+        <p class="label">01 · The problem</p>
+        <h2><span class="serif">One editor,</span> <span class="wide">every cut</span></h2>
+      </div>
+      <div class="cs-body">
+        <p>Club videos like FASA's theater productions, event recaps and short films always come down to a deadline with one person doing every cut. Other people could help, but Final Cut Pro has nothing built in for teamwork. Teams email XML files around or pass a library back and forth, and work gets lost.</p>
+        <p>So I asked: could several people edit one FCP video at the same time, like a Google Doc?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- research -->
+  <section class="cs-alt">
+    <div class="wrap cs-grid">
+      <div>
+        <p class="label">02 · Research</p>
+        <h2><span class="serif">What</span> <span class="wide">exists</span></h2>
+      </div>
+      <div class="cs-body">
+        <p>I looked at how six tools handle collaboration before writing any code.</p>
+        <div class="cs-table" role="table" aria-label="Collaboration in video editors">
+          <div class="row head" role="row"><span role="columnheader">Tool</span><span role="columnheader">How teams share</span><span role="columnheader">Same timeline at once?</span></div>
+          <div class="row" role="row"><span>Final Cut Pro</span><span>Nothing built in</span><span class="no">No</span></div>
+          <div class="row" role="row"><span>PostLab</span><span>Locks and versions whole libraries</span><span class="no">No</span></div>
+          <div class="row" role="row"><span>DaVinci Resolve</span><span>Bin and timeline locking, timeline compare</span><span>Different timelines</span></div>
+          <div class="row" role="row"><span>Premiere Pro</span><span>Team Projects, sequence locking</span><span>Different sequences</span></div>
+          <div class="row" role="row"><span>CapCut</span><span>Team spaces, members take turns</span><span class="no">No</span></div>
+          <div class="row" role="row"><span>Kapwing</span><span>Browser editor, live cursors</span><span>Yes, but chaotic</span></div>
+        </div>
+        <p class="cs-callout"><b>The insight:</b> every serious tool chose <em>one owner per section, then merge</em>, not live co-editing, because two people trimming the same spot undo each other. FCP also has no live timeline API. So I built the version that's possible and actually useful: parallel segments, automatic assembly and clear change tracking.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- build -->
+  <section id="build">
+    <div class="wrap">
+      <div class="cs-grid">
+        <div>
+          <p class="label">03 · What I built</p>
+          <h2><span class="serif">Split,</span> <span class="wide">edit, merge</span></h2>
+        </div>
+        <div class="cs-body">
+          <ol class="cs-steps">
+            <li><b>New project.</b> The lead editor right-clicks a rough cut and picks where to split it. Cuts snap to the nearest clip.</li>
+            <li><b>Open a segment.</b> Each editor locks their piece and it opens in Final Cut Pro, with media relinked for their Mac.</li>
+            <li><b>Submit.</b> They export, right-click, and add a note. A visual diff opens showing exactly what changed.</li>
+            <li><b>Assemble.</b> One right-click stitches every segment into a master timeline and opens it in FCP.</li>
+          </ol>
+        </div>
+      </div>
+
+      <figure class="cs-shot wide-shot">
+        <img src="../assets/cutshare/demo-zoom.gif" width="960" height="667" loading="lazy" alt="The visual diff zooming into four removed clips and one trimmed clip">
+        <figcaption><span class="label">The visual diff</span> Every lane of the timeline, with unchanged clips in grey and changes in color. "Zoom to changes" jumps to the edit, since real changes are often under a second.</figcaption>
+      </figure>
+
+      <div class="cs-pair">
+        <figure class="cs-shot">
+          <img src="../assets/cutshare/dialog-segment.webp" width="678" height="406" loading="lazy" alt="Dialog asking which segment to save a file as">
+          <figcaption><span class="label">Native Mac dialogs</span> It guesses the segment you're working on.</figcaption>
+        </figure>
+        <figure class="cs-shot">
+          <img src="../assets/cutshare/dialog-note.webp" width="856" height="326" loading="lazy" alt="Dialog asking for a short note about what changed">
+          <figcaption><span class="label">A note for the team</span> Saved with the version history.</figcaption>
+        </figure>
+      </div>
+
+      <figure class="cs-shot wide-shot">
+        <img src="../assets/cutshare/fcp-master.webp" width="1600" height="616" loading="lazy" alt="Assembled master timeline in Final Cut Pro with titles, adjustment layer and connected clips">
+        <figcaption><span class="label">Back in Final Cut Pro</span> The assembled master, with every color grade, sound effect, title and adjustment layer intact.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- how -->
+  <section id="how" class="cs-alt">
+    <div class="wrap cs-grid">
+      <div>
+        <p class="label">04 · How it works</p>
+        <h2><span class="serif">The</span> <span class="wide">hard parts</span></h2>
+      </div>
+      <div class="cs-body">
+        <dl class="cs-list">
+          <dt>Merging timelines</dt>
+          <dd>Each FCP export numbers its media and effects from scratch, so a naive merge collides. CutShare re-keys every resource per segment, de-duplicates shared footage, renumbers everything, and makes title styles unique. The output passes Apple's own FCPXML format checks.</dd>
+          <dt>Frame-accurate time</dt>
+          <dd>All timing uses exact fractions instead of decimals, so nothing drifts off a frame at 23.976, 29.97 or 59.94 fps.</dd>
+          <dt>Media on every Mac</dt>
+          <dd>Footage lives in a different place on every computer. Paths become a placeholder when saved and turn into each editor's own folder when opened.</dd>
+          <dt>Sync without a server</dt>
+          <dd>A project is a folder on Google Drive or Dropbox. Every version and lock is its own small file, so two people syncing at once never write to the same file.</dd>
+          <dt>Finding what changed</dt>
+          <dd>Main-storyline clips are aligned like a text diff. Connected clips are matched in three passes, nearest first, so a clip that moves along with its parent isn't flagged as changed.</dd>
+          <dt>No Terminal</dt>
+          <dd>Five Finder Quick Actions, generated as Automator workflows with native macOS dialogs, plus a one-click installer.</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- results -->
+  <section id="results">
+    <div class="wrap cs-grid">
+      <div>
+        <p class="label">05 · Results</p>
+        <h2><span class="serif">Tested on</span> <span class="wide">real footage</span></h2>
+      </div>
+      <div class="cs-body">
+        <ul class="cs-bullets">
+          <li>Split a real 59.94p short film (11 lanes, 72 clips, 55 media and effect files) and reassembled it with <b>zero differences</b> from the original.</li>
+          <li>The visual diff caught all <b>5 real edits</b> I made, all within about one second of a 30-second segment.</li>
+          <li>Imported back into Final Cut Pro 12 with color grades, sound effects, titles and masks intact.</li>
+          <li><b>17 automated tests</b> run on every change, on Mac and Linux, including a simulated three-editor session.</li>
+        </ul>
+        <figure class="cs-shot">
+          <img src="../assets/cutshare/fcp-segment.webp" width="1600" height="622" loading="lazy" alt="A segment back in Final Cut Pro after a round trip through CutShare">
+          <figcaption><span class="label">After a round trip</span> A segment back in Final Cut Pro with every lane, title and adjustment clip in place.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- learned -->
+  <section class="cs-alt">
+    <div class="wrap cs-grid">
+      <div>
+        <p class="label">06 · What I learned</p>
+        <h2><span class="serif">Research</span> <span class="wide">first</span></h2>
+      </div>
+      <div class="cs-body">
+        <p>My first idea, live editing like Google Docs, turned out to be both impossible in FCP and something pro tools deliberately avoid. Researching first turned a dead end into a clearer product: parallel work plus a great merge.</p>
+        <p>Testing on my own messy real project mattered more than my sample files. It surfaced compound clips, retimes and lane shifts that synthetic tests never would have.</p>
+        <p class="label next-label">Next up</p>
+        <p>A pilot with other FCP editors on a real club video, a solo mode for version history even without a team, and a panel inside Final Cut Pro.</p>
+        <div class="ctas">
+          <a class="btn solid" href="https://github.com/ryanmarkgenova/cutshare" target="_blank" rel="noopener">See the code</a>
+          <a class="btn" href="../index.html#work">Back to all work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bottombar">
+  <div class="wrap bottom-in"><span class="label"><b>Ryan Mark Genova</b> · CutShare case study</span><a class="label" href="../index.html">ryan genova home</a></div>
+</footer>
+</body>
+</html>
