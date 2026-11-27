@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alaala: Culture-Aware Photo Search · Ryan Genova</title>
+<meta name="description" content="Alaala searches your Apple Photos library the way Filipino families talk. Type &quot;lolo&quot; or &quot;halo-halo&quot; and it finds the right photos, all on your Mac.">
+<meta property="og:title" content="Alaala: Search your photos the way you talk">
+<meta property="og:description" content="Photo search doesn't understand Filipino, so I built a culture-aware layer on top of CLIP. +45% nDCG@10 on Filipino queries.">
+<meta property="og:image" content="../assets/alaala/alaala-og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Hanken+Grotesk:wght@400;500;600&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="../style.css?v=4">
+</head>
+<body class="case">
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="../index.html">RYAN MARK GENOVA</a>
+    <nav class="toplinks" aria-label="Sections">
+      <a href="#problem">Problem</a><a href="#build">Build</a><a href="#results">Results</a><a href="#learns">Learning</a>
+    </nav>
+    <a class="pill back-link" href="../index.html#work">← All work</a>
+  </div>
+</header>
+
+<main>
+  <section class="cs-hero">
+    <div class="wrap">
+      <p class="label">Case study · Nov 2026 · Personal project</p>
+      <h1 class="cs-title"><span class="wide">Alaala</span></h1>
+      <p class="cs-sub"><span class="serif">Search your photos the way you talk</span></p>
+      <p class="lede">Photo search assumes English. Type "lolo" (grandpa) into Apple Photos and you get nothing. I built a culture-aware search layer that understands Taglish, links family words to the actual people in your library, and runs entirely on your Mac. <em>Alaala</em> means "memory" in Tagalog.</p>
+      <div class="cs-meta">
+        <div><span class="label">Role</span><p>Solo: research, modeling, evaluation, app</p></div>
+        <div><span class="label">Built with</span><p>Python, PyTorch, MobileCLIP2, scikit-learn, SQLite, osxphotos, pywebview</p></div>
+        <div><span class="label">Tested on</span><p>My family's real library: 434 photos and videos</p></div>
+      </div>
+      <div class="ctas">
+        <a class="btn solid" href="https://github.com/ryanmarkgenova/alaala" target="_blank" rel="noopener">Code on GitHub</a>
+        <a class="btn" href="#results">See the results</a>
+      </div>
+    </div>
+    <div class="wrap">
+      <figure class="cs-shot hero-shot">
+        <img src="../assets/alaala/lolo-compare.webp" width="1600" height="764" alt="Searching lolo: plain search returns random relatives and food, Alaala returns photos of grandpa. Faces blurred.">
+        <figcaption><span class="label">Searching "lolo"</span> Left: plain AI search returns random relatives and food. Right: Alaala. Faces blurred for privacy.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="cs-band">
+    <div class="wrap">
+      <div class="kpis">
+        <div class="kpi"><b>+45%</b><span>nDCG@10, Filipino queries</span></div>
+        <div class="kpi"><b>+66%</b><span>Recall@10, Filipino queries</span></div>
+        <div class="kpi"><b>0</b><span>Change on English queries</span></div>
+        <div class="kpi"><b>~70</b><span>Filipino terms taught</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="problem">
+    <div class="wrap cs-grid">
+      <div>
+        <p class="label">01 · The problem</p>
+        <h2><span class="serif">The photos were there,</span> <span class="wide">the words weren't</span></h2>
+      </div>
+      <div class="cs-body">
+        <p>Apple's natural-language search in Photos doesn't support Filipino, and open models like CLIP don't know what "lolo" or "ensaymada" look like. Searching "lolo" in my own library returned food, beaches and random relatives. Searching "grandfather" worked fine.</p>
+        <p>That's how a lot of Filipino families actually talk: Taglish, family titles instead of names, and holidays like Noche Buena that no search engine knows the date of.</p>
+        <figure class="cs-shot">
+          <img src="../assets/alaala/apple-photos.webp" width="1600" height="198" loading="lazy" alt="Apple Photos shows no results for lolo or lumpia">
+          <figcaption><span class="label">Apple Photos, same library</span> No results for "lolo" or "lumpia."</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="build" class="cs-alt">
+    <div class="wrap">
+      <div class="cs-grid">
+        <div>
+          <p class="label">02 · What I built</p>
+          <h2><span class="serif">A culture</span> <span class="wide">layer</span></h2>
+        </div>
+        <div class="cs-body">
+          <p>Everything runs locally. No photos leave the Mac.</p>
+          <ol class="cs-steps">
+            <li><b>Ingest.</b> Reads the Apple Photos library: dates, places and the people you've named, using Photos' local previews so it works with Optimize Storage.</li>
+            <li><b>Embed.</b> Encodes every photo with Apple's MobileCLIP2, small enough to run on an 8GB M2.</li>
+            <li><b>Translate culture.</b> Turns a Taglish query into something the model understands (below).</li>
+            <li><b>Search and tag.</b> Ranks results in a native Mac app, with a Compare mode, and can write matches back into Photos as keywords after you approve them.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="cs-grid" style="margin-top:48px">
+        <div><p class="label">The culture layer</p></div>
+        <div class="cs-body">
+          <dl class="cs-list">
+            <dt>Lexicon</dt>
+            <dd>About 70 Filipino terms mapped to what they look like. "halo-halo" becomes "a shaved ice dessert with purple ube ice cream, beans and fruit," averaged as a prompt ensemble.</dd>
+            <dt>Kinship mapping</dt>
+            <dd>"lolo" and "tita" link to the actual people named in Photos, and their photos get a ranking boost.</dd>
+            <dt>Holiday windows</dt>
+            <dd>"noche buena" and "simbang gabi" limit results to the right dates.</dd>
+            <dt>Only when needed</dt>
+            <dd>The layer only steps in when it recognizes a term, so English searches behave exactly like before.</dd>
+          </dl>
+        </div>
+      </div>
+      <figure class="cs-shot wide-shot">
+        <img src="../assets/alaala/halohalo-compare.webp" width="1600" height="773" loading="lazy" alt="Searching halo-halo: plain search finds nothing relevant, Alaala finds halo-halo and related Filipino desserts">
+        <figcaption><span class="label">Searching "halo-halo"</span> Plain search finds nothing relevant. Alaala finds the halo-halo, then related Filipino desserts further down.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="results">
+    <div class="wrap cs-grid">
+      <div>
+        <p class="label">03 · Results</p>
+        <h2><span class="serif">A fair</span> <span class="wide">test</span></h2>
+      </div>
+      <div class="cs-body">
+        <p>I labeled queries from my own library with a tool I built. Candidates from both methods were pooled and shuffled, so I couldn't tell which method found which photo. The final numbers come from 14 held-out queries written after all tuning was frozen.</p>
+        <div class="cs-table" role="table" aria-label="Held-out test results">
+          <div class="row head" role="row"><span role="columnheader">Queries</span><span role="columnheader">Method</span><span role="columnheader">nDCG@10 · Recall@10</span></div>
+          <div class="row" role="row"><span>Filipino (9)</span><span>Plain CLIP</span><span class="no">0.354 · 0.357</span></div>
+          <div class="row" role="row"><span>Filipino (9)</span><span>Alaala</span><span>0.512 · 0.592</span></div>
+          <div class="row" role="row"><span>English (5)</span><span>Plain CLIP</span><span class="no">0.627 · 0.571</span></div>
+          <div class="row" role="row"><span>English (5)</span><span>Alaala</span><span class="no">0.627 · 0.571</span></div>
+        </div>
+        <ul class="cs-bullets">
+          <li><b>+45% nDCG@10 and +66% Recall@10</b> on Filipino queries, with <b>no change</b> on English.</li>
+          <li>Biggest wins: "pamilya dinner," "barkada" and "lolo at the table."</li>
+          <li>On the dev set, Filipino nDCG went from 0.36 to 0.67. The drop on the test set is exactly the overfitting a held-out set exists to catch.</li>
+          <li>"pancit" still loses on test. I left it as a known gap instead of tuning on test data.</li>
+        </ul>
+        <figure class="cs-shot">
+          <img src="../assets/alaala/labeling.webp" width="1600" height="862" loading="lazy" alt="The labeling tool: a grid of shuffled candidate photos with matches outlined in green. Faces blurred.">
+          <figcaption><span class="label">The labeling tool</span> Click every photo that truly matches. Candidates from both methods, shuffled.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="learns" class="cs-alt">
+    <div class="wrap cs-grid">
+      <div>
+        <p class="label">04 · It learns from you</p>
+        <h2><span class="serif">Every answer is</span> <span class="wide">training data</span></h2>
+      </div>
+      <div class="cs-body">
+        <p>Alaala starts zero-shot, then learns your family's version of things. "Not this," Yes/No in Teach mode, and every tag you approve are saved locally.</p>
+        <dl class="cs-list">
+          <dt>A small model per search</dt>
+          <dd>After 3 yeses, it trains a logistic regression on the photo embeddings for that search and blends it in. Trust grows with evidence: examples / (examples + 8).</dd>
+          <dt>Smart questions</dt>
+          <dd>Teach mode shows the photos the model is least sure about (active learning), so each answer teaches it the most.</dd>
+          <dt>Measured, not assumed</dt>
+          <dd>My first comparison showed a +0.12 gain. A paired test, scoring both models on the same searches and the same hidden photos, showed most of that was selection bias. The honest gain is about +0.04 at 3 examples.</dd>
+        </dl>
+        <figure class="cs-shot" style="margin-top:28px">
+          <img src="../assets/alaala/learning-curve.webp" width="1600" height="960" loading="lazy" alt="Learning curve: learned model slightly above zero-shot at 1 to 5 examples, converging around 0.89 nDCG">
+          <figcaption><span class="label">The paired learning curve</span> Learned vs zero-shot on the same searches as you confirm more photos.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap cs-grid">
+      <div>
+        <p class="label">05 · What I learned</p>
+        <h2><span class="serif">Trust the</span> <span class="wide">held-out set</span></h2>
+      </div>
+      <div class="cs-body">
+        <p>Swapping every Filipino word for a description helped words CLIP didn't know, but hurt words it already did, like lumpia and pancit. Keeping the original word alongside the description fixed most of that, and only showed up on the test set.</p>
+        <p>The +0.12 that turned out to be selection bias was the most useful result of the project. It's why the tagging step always goes through human review: zero-shot similarity is great for ranking, but on my library no cutoff reached 85% precision.</p>
+        <p class="label next-label">Next up</p>
+        <p>A bigger Filipino word bank, on-device captions, a public demo with openly licensed photos, and more cultures: halmeoni, abuela, bà.</p>
+        <div class="ctas">
+          <a class="btn solid" href="https://github.com/ryanmarkgenova/alaala" target="_blank" rel="noopener">See the code</a>
+          <a class="btn" href="../index.html#work">Back to all work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="bottombar">
+  <div class="wrap bottom-in"><span class="label"><b>Ryan Mark Genova</b> · Alaala case study</span><a class="label" href="../index.html">ryan genova home</a></div>
+</footer>
+</body>
+</html>
