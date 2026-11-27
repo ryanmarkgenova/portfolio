@@ -321,3 +321,14 @@ html.has-blob,html.has-blob *{cursor:none!important}
   .cs-table .row{grid-template-columns:1fr 1fr;font-size:14px}
   .cs-table .row span:nth-child(2){grid-column:1/-1;order:3;color:var(--muted)}
 }
+
+/* ===== case study charts ===== */
+.cs-charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:40px}
+.chart-card{margin:0;padding:20px 22px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+.chart-card > .label{margin:0 0 14px;color:var(--yellow)}
+.chart-card svg{display:block;height:auto}
+.chart-card figcaption{margin-top:10px;color:var(--muted);font-size:14.5px}
+.cs-quote{margin-top:28px}
+.cs-video{position:relative;aspect-ratio:16/9;margin-top:22px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#0E0B08}
+.cs-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media (max-width:900px){.cs-charts{grid-template-columns:1fr}}
